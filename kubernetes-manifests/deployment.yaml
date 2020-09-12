@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techchallenge
+spec:
+  selector:
+    matchLabels:
+      app:  techchallenge
+  template:
+    metadata:
+      labels:
+        app: techchallenge
+    spec:
+      containers:
+        - name: techchallenge
+          image: 481065990361.dkr.ecr.us-west-2.amazonaws.com/techchallenge:version3
+          ports:
+            - containerPort: 80
+          env:
+            - name: VTT_DBHOST
+              valueFrom:
+                secretKeyRef:
+                  name: dbcreds
+                  key: dbendpoint
+            - name: VTT_DBUSER
+              valueFrom:
+                secretKeyRef:
+                  name: dbcreds
+                  key: dbusername
+            - name: VTT_DBPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dbcreds
+                  key: dbpassword
+            - name: VTT_DBNAME
+              valueFrom:
+                secretKeyRef:
+                  name: dbcreds
+                  key: dbname
+            - name: VTT_DBPORT
+              valueFrom:
+                secretKeyRef:
+                  name: dbcreds
+                  key: dbport
+            - name: VTT_LISTENHOST
+              valueFrom:
+                secretKeyRef:
+                  name: dbcreds
+                  key: listenerhost
+            - name: VTT_LISTENPORT
+              valueFrom:
+                secretKeyRef:
+                  name: dbcreds
+                  key: listenerport
+
