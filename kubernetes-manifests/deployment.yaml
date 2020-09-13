@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: techchallenge
-          image: 481065990361.dkr.ecr.us-west-2.amazonaws.com/techchallenge:version3
+          image: {{registry_id}}.dkr.ecr.{{region}}.amazonaws.com/{{repo_name}}
           ports:
             - containerPort: 80
           env:
