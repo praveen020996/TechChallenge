@@ -18,3 +18,42 @@ The terraform creates the following resources:
 - ECR
 - SecretsManager secret to store DB credentials
 - 1 EC2 instance in a public subnet that builds the app, pushes the image to ECR, runs the kubectl command to create deployment and service. All the commands are fed through EC2 User data
+
+How to run:
+
+- Install terraform - version 0.13.0 from this link: https://releases.hashicorp.com/terraform/0.13.0/
+- Add terraform to PATH
+- Clone this repo and go to 'terraform-setup' directory
+```
+git clone https://github.com/praveen020996/TechChallenge.git
+cd TechChallenge/terraform-setup
+```
+- Run terraform commands
+```
+terraform init
+terraform apply
+```
+- The script asks for following inputs
+
+1. aws_access_key_id - AWS Access Key
+2. aws_secret_access_key - AWS Secret Access Key
+3. aws_region - The region in which you want to deploy the resources. ex: us-east-1
+4. db_user_name - RDS DB User Name
+5. db_password - RDS DB password
+
+  **Note:** The access key and secret key must have permissions to work with services listed in high level architecture.
+ 
+- It takes around 15-20 minutes for all the resources to get created and EC2 user data to run. 
+- After all the resources are created, go to Load Balancers section in AWS console and wait for an ELB to be created. 
+- The ELB is created as a service to expose pods in EKS cluster. This might take 5 more minutes.
+- After the load balancer is created, wait for the instances' state to be 'InService'.
+- When the status become 'InService', copy the ELB DNS and paste it in the browser.
+
+## How to delete the resources
+
+- Since ELB is not managed by terraform, it needs to be deleted manually.
+- After ELB is deleted, run the following command in TechChallenge/terraform-setup folder.
+
+```
+terraform destroy
+```
