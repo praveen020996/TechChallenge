@@ -49,6 +49,8 @@ terraform apply
 - After the load balancer is created, wait for the state of the instances to be 'InService'.
 - When the status becomes 'InService', copy the ELB DNS and paste it in the browser.
 
+![elbinservice](https://user-images.githubusercontent.com/42564839/93084693-1a0ea380-f6b2-11ea-9eaf-46522b9c5b09.png)
+
 ## How to delete the resources
 
 - Since ELB is not managed by terraform, it needs to be deleted manually.
