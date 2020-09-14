@@ -46,8 +46,8 @@ terraform apply
 - It takes around 15-20 minutes for all the resources to get created and EC2 user data to run. 
 - After all the resources are created, go to Load Balancers section in AWS console and wait for an ELB to be created. 
 - The ELB is created as a service to expose pods in EKS cluster. This might take 5 more minutes.
-- After the load balancer is created, wait for the instances' state to be 'InService'.
-- When the status become 'InService', copy the ELB DNS and paste it in the browser.
+- After the load balancer is created, wait for the state of the instances to be 'InService'.
+- When the status becomes 'InService', copy the ELB DNS and paste it in the browser.
 
 ## How to delete the resources
 
